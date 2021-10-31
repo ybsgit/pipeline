@@ -14,7 +14,7 @@ PASS = credentials('reg-cred')
             }
     post {
         always {
-            archiveArtifacts artifacts: 'simple-java-maven-app/target/*.jar', fingerprint: true
+            archiveArtifacts artifacts: '/app/target/*.jar', fingerprint: true
         }
     }
         }
@@ -26,7 +26,7 @@ PASS = credentials('reg-cred')
             }
     post {
         always {
-            junit 'simple-java-maven-app/target/sunfire-reports/*.xml'
+            junit '/app/target/sunfire-reports/*.xml'
         }
     }
         }
