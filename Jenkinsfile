@@ -13,12 +13,23 @@ PASS = credentials('reg-cred')
                ./jenkins/build/mvn.sh
                '''
             }
+    post {
+        always {
+            archiveArtifacts artifacts: 'simple-java-maven-app/target/*.jar', fingerprint: true
+        }
+    }
         }
         stage('Test') {
+
             steps {
                 echo 'Testing..'
 		sh './jenkins/test/mvn.sh mvn test'
             }
+    post {
+        always {
+            junit 'simple-java-maven-app/target/sunfire-reports/*.xml'
+        }
+    }
         }
         stage('Deploy') {
             steps {
